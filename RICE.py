@@ -1,6 +1,4 @@
 import streamlit as st
-import pickle
-import sklearn
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import OrdinalEncoder,LabelEncoder
@@ -8,9 +6,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
-# Load the model using joblib
+from sklearn.ensemble import VotingClassifier
 
-# Now try predicting
 st.title('Rice Grain Quality Detection')
 st.sidebar.header('Provide Input')
 model = st.sidebar.selectbox('Select Methodology',["Logistic Regression","Decision Tree","K Nearest Neighbor","Hybrid"])
@@ -78,7 +75,6 @@ elif (model == "K Nearest Neighbor"):
     probability = lr.predict([user_data])
     
 else:
-    from sklearn.ensemble import VotingClassifier
     model1 = LogisticRegression(random_state=1)
     model2 = DecisionTreeClassifier(random_state=1)
     model3 = KNeighborsClassifier()
